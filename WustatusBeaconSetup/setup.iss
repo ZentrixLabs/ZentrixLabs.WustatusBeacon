@@ -19,7 +19,7 @@ ArchitecturesInstallIn64BitMode=x64
 DefaultDialogFontName=Segoe UI
 
 [Files]
-Source: "..\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\ZentrixLabs.WustatusBeacon\bin\Release\net48\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
