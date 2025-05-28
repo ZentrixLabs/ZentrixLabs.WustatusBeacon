@@ -1,6 +1,6 @@
 [Setup]
 AppName=Wustatus Beacon
-AppVersion=0.1.0
+AppVersion=0.1.1
 DefaultDirName={pf64}\ZentrixLabs\WustatusBeacon
 DefaultGroupName=Wustatus Beacon
 OutputDir=..\artifacts
@@ -20,7 +20,7 @@ DefaultDialogFontName=Segoe UI
 
 [Files]
 Source: "..\ZentrixLabs.WustatusBeacon\bin\x64\Release\net48\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\WustatusBeaconInstaller\bin\Release\ZentrixLabs.WustatusBeaconInstaller.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\WustatusBeaconInstaller\bin\Release\ZentrixLabs.WustatusBeaconInstaller.exe"; DestDir: "{app}"; Flags: ignoreversion uninsneveruninstall
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
@@ -47,3 +47,5 @@ Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
 
 [UninstallRun]
 Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; Parameters: "uninstall"; Flags: runhidden waituntilterminated
+Filename: "cmd.exe"; Parameters: "/c del /f /q ""{app}\ZentrixLabs.WustatusBeaconInstaller.exe"""; Flags: runhidden
+
