@@ -46,19 +46,14 @@ Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
 
 
 [UninstallRun]
-; Primary uninstall logic
+; Run C++ uninstaller (logs and stops the service)
 Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
   Parameters: "uninstall"; \
   Flags: runhidden waituntilterminated
 
-; Safety net: forcefully delete service if it's still registered
-Filename: "sc.exe"; \
-  Parameters: "delete Wustatus.Beacon"; \
-  Flags: runhidden waituntilterminated
+; Failsafe: forcibly delete the service if needed
+Filename: "sc.exe"; Parameters: "delete Wustatus.Beacon"; Flags: runhidden waituntilterminated
 
-; Clean up the uninstaller helper EXE
-Filename: "cmd.exe"; \
-  Parameters: "/c del /f /q ""{app}\ZentrixLabs.WustatusBeaconInstaller.exe"""; \
-  Flags: runhidden
-
+; Cleanup the helper EXE — use cmd to avoid Inno race conditions
+Filename: "cmd.exe"; Parameters: "/c del /f /q ""{app}\ZentrixLabs.WustatusBeaconInstaller.exe"""; Flags: runhidden
 
