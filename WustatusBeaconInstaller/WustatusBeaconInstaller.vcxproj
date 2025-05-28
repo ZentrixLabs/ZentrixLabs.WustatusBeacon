@@ -55,11 +55,12 @@
 	<GenerateManifest>false</GenerateManifest>
     <ManifestFile>ZentrixLabs.WustatusBeaconInstaller.exe.manifest</ManifestFile>
 	<OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <BeaconBinaryPath>..\ZentrixLabs.WustatusBeacon\bin\x64\Release\ZentrixLabs.WustatusBeacon.exe</BeaconBinaryPath>
   </PropertyGroup>
   <Target Name="CopyServiceBinary" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-  <Copy
-    SourceFiles="..\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"
-    DestinationFolder="$(OutDir)" />
+    <Copy
+      SourceFiles="$(BeaconBinaryPath)"
+      DestinationFolder="$(OutDir)" />
   </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

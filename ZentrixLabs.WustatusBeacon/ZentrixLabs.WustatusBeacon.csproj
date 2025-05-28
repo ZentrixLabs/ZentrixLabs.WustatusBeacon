@@ -1,17 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
+
+    <!-- Needed for Windows Services -->
     <UseWPF>false</UseWPF>
-    <UseWindowsForms>true</UseWindowsForms> <!-- Needed for Windows service apps -->
+    <UseWindowsForms>true</UseWindowsForms>
+
     <RootNamespace>ZentrixLabs.WustatusBeacon</RootNamespace>
     <AssemblyName>ZentrixLabs.WustatusBeacon</AssemblyName>
     <ApplicationIcon>beacon.ico</ApplicationIcon>
+
+    <!-- Assembly Info Metadata (replaces AssemblyInfo.cs) -->
+    <AssemblyTitle>ZentrixLabs.WustatusBeacon</AssemblyTitle>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Company>ZentrixLabs</Company>
+    <Product>Wustatus Beacon</Product>
     <Platforms>x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,4 +32,5 @@
     </None>
     <Content Include="beacon.ico" />
   </ItemGroup>
+
 </Project>
