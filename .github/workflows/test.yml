@@ -63,7 +63,6 @@ jobs:
 
       - name: Build Inno Setup Installer
         run: |
-          cd ZentrixLabs.WustatusBeacon
           $env:Path += ";C:\Program Files (x86)\Inno Setup 6"
           ISCC.exe "${{ env.SetupPath }}\setup.iss" /DMyAppVersion="${{ env.APP_VERSION }}" > "${{ env.ARTIFACTS_DIR }}\iscc.log" 2>&1
           if ($LASTEXITCODE -ne 0) {
@@ -71,7 +70,7 @@ jobs:
             exit $LASTEXITCODE
           }
         shell: powershell
-        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+        working-directory: D:\a
 
       - name: Upload Test Installer
         uses: actions/upload-artifact@v4
