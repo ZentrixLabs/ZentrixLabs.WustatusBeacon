@@ -17,7 +17,6 @@ AppUpdatesURL=https://github.com/ZentrixLabs/ZentrixLabs.WustatusBeacon
 SetupLogging=yes
 ArchitecturesInstallIn64BitMode=x64
 DefaultDialogFontName=Segoe UI
-DefaultDialogFontSize=9
 
 [Files]
 Source: "ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"
