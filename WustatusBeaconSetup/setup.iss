@@ -46,6 +46,19 @@ Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
 
 
 [UninstallRun]
-Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; Parameters: "uninstall"; Flags: runhidden waituntilterminated
-Filename: "cmd.exe"; Parameters: "/c del /f /q ""{app}\ZentrixLabs.WustatusBeaconInstaller.exe"""; Flags: runhidden
+; Primary uninstall logic
+Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
+  Parameters: "uninstall"; \
+  Flags: runhidden waituntilterminated
+
+; Safety net: forcefully delete service if it's still registered
+Filename: "sc.exe"; \
+  Parameters: "delete Wustatus.Beacon"; \
+  Flags: runhidden waituntilterminated
+
+; Clean up the uninstaller helper EXE
+Filename: "cmd.exe"; \
+  Parameters: "/c del /f /q ""{app}\ZentrixLabs.WustatusBeaconInstaller.exe"""; \
+  Flags: runhidden
+
 
