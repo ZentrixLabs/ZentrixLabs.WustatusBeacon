@@ -1,0 +1,85 @@
+name: Build Test Installer
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+env:
+  SIGN_CODE: false
+  BASE_DIR: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon
+  ARTIFACTS_DIR: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts
+  TEMP_DIR: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\temp
+  SolutionPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.sln
+  SetupPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconSetup
+  BeaconBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\x64\Release
+  BeaconExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\x64\Release\WustatusBeacon.exe
+  BeaconServiceInstallerBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release
+  BeaconServiceInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release\ZentrixLabs.WustatusBeaconInstaller.exe
+  BeaconInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\WustatusBeaconInstaller.exe
+
+jobs:
+  test-build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: .
+
+      - name: Set default version for test build
+        run: echo "APP_VERSION=0.0.0-dev" | Out-File -FilePath $env:GITHUB_ENV -Append
+        shell: powershell
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Create artifacts and temp directories
+        run: |
+          New-Item -ItemType Directory -Force -Path "${{ env.ARTIFACTS_DIR }}"
+          New-Item -ItemType Directory -Force -Path "${{ env.TEMP_DIR }}"
+        shell: powershell
+
+      - name: Restore NuGet packages
+        run: msbuild "${{ env.SolutionPath }}" -t:Restore -p:Configuration=Release -p:Platform=x64
+        shell: powershell
+
+      - name: Build C# and Service Installer projects
+        run: |
+          msbuild ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj /p:Configuration=Release /p:Platform=x64
+          msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
+        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+        shell: powershell
+
+      - name: Download and Install Inno Setup
+        run: |
+          Invoke-WebRequest -Uri https://jrsoftware.org/download.php/is.exe -OutFile inno-setup-installer.exe
+          Start-Process -FilePath .\inno-setup-installer.exe -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait
+        shell: powershell
+        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+
+      - name: Copy Icon to working directory
+        run: Copy-Item "beacon.ico" -Destination "beacon.ico"
+        shell: powershell
+        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+
+      - name: Build Inno Setup Installer
+        run: |
+          $env:Path += ";C:\Program Files (x86)\Inno Setup 6"
+          ISCC.exe "${{ env.SetupPath }}\setup.iss" /DMyAppVersion="${{ env.APP_VERSION }}" > "${{ env.ARTIFACTS_DIR }}\iscc.log" 2>&1
+          if ($LASTEXITCODE -ne 0) {
+            Get-Content "${{ env.ARTIFACTS_DIR }}\iscc.log"
+            exit $LASTEXITCODE
+          }
+        shell: powershell
+        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+
+      - name: Upload Test Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: WustatusBeacon-TestInstaller
+          path: ${{ env.BeaconInstallerExe }}
+          retention-days: 3

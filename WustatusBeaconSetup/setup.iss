@@ -11,14 +11,16 @@ Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
 AppPublisher=ZentrixLabs
-AppPublisherURL=https://zentrixlabs.com
-AppSupportURL=https://zentrixlabs.com/support
-AppUpdatesURL=https://zentrixlabs.com/updates
+AppPublisherURL=https://zentrixlabs.net
+AppSupportURL=https://github.com/ZentrixLabs/ZentrixLabs.WustatusBeacon/issues
+AppUpdatesURL=https://github.com/ZentrixLabs/ZentrixLabs.WustatusBeacon
 SetupLogging=yes
 ArchitecturesInstallIn64BitMode=x64
+DefaultDialogFontName=Segoe UI
+DefaultDialogFontSize=9
 
 [Files]
-Source: "..\WustatusBeacon\bin\x64\Release\WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\ZentrixLabs.WustatusBeacon\bin\x64\Release\WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\WustatusBeaconInstaller\bin\x64\Release\ZentrixLabs.WustatusBeaconInstaller.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 

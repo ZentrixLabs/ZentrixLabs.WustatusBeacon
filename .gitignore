@@ -1,38 +1,39 @@
-# Prerequisites
-*.d
+# Build artifacts
+**/bin/
+**/obj/
+**/x64/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.VC.db
 
-# Precompiled Headers
+# Installers & Inno Setup
+WustatusBeaconSetup/artifacts/
+*.log
+*.iss~  # backup files created by Inno Setup
+
+# Output executables
+*.exe
+*.dll
+*.app
+*.out
+
+# Intermediate files
+*.pdb
+*.cache
+*.tlog
+*.idb
+*.ipch
+*.iobj
+*.ipdb
+
+# Precompiled headers
 *.gch
 *.pch
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-/.vs
-/WustatusBeaconInstaller/bin
-/WustatusBeaconInstaller/x64
-/ZentrixLabs.WustatusBeacon/.vs
-/ZentrixLabs.WustatusBeacon/obj
-/ZentrixLabs.WustatusBeacon/bin
+# System junk
+.DS_Store
+Thumbs.db
+desktop.ini
