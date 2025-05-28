@@ -15,8 +15,8 @@ env:
   TEMP_DIR: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\temp
   SolutionPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.sln
   SetupPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconSetup
-  BeaconBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\x64\Release
-  BeaconExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\x64\Release\WustatusBeacon.exe
+  BeaconBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\Release
+  BeaconExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe
   BeaconServiceInstallerBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release
   BeaconServiceInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release\ZentrixLabs.WustatusBeaconInstaller.exe
   BeaconInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\WustatusBeaconInstaller.exe
@@ -49,7 +49,7 @@ jobs:
 
       - name: Build all projects
         run: |
-          msbuild ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj /p:Configuration=Release /p:Platform=x64
+          msbuild ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj /p:Configuration=Release
           msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
         working-directory: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon
         shell: powershell
@@ -58,11 +58,6 @@ jobs:
         run: |
           Invoke-WebRequest -Uri https://jrsoftware.org/download.php/is.exe -OutFile inno-setup-installer.exe
           Start-Process -FilePath .\inno-setup-installer.exe -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait
-        shell: powershell
-        working-directory: D:\a\ZentrixLabs.WustatusBeacon
-
-      - name: Copy Icon to working directory
-        run: Copy-Item "beacon.ico" -Destination "beacon.ico"
         shell: powershell
         working-directory: D:\a\ZentrixLabs.WustatusBeacon
 

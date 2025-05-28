@@ -58,7 +58,7 @@
   </PropertyGroup>
   <Target Name="CopyServiceBinary" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
   <Copy
-    SourceFiles="..\WustatusBeacon\x64\Release\WustatusBeacon.exe"
+    SourceFiles="..\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"
     DestinationFolder="$(OutDir)" />
   </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
