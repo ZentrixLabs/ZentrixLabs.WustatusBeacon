@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
-
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <!-- Needed for Windows Services -->
     <UseWPF>false</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
