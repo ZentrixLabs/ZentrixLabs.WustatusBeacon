@@ -47,12 +47,15 @@ jobs:
         run: msbuild "${{ env.SolutionPath }}" -t:Restore -p:Configuration=Release -p:Platform=x64
         shell: powershell
 
-      - name: Build all projects
+      - name: Publish .NET Service Project (includes all DLLs)
         run: |
-          msbuild ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj /p:Configuration=Release
-          msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
-        working-directory: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon
-        shell: powershell
+         dotnet publish ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj `
+         -c Release `
+         -r win-x64 `
+         --self-contained false `
+         -o $env:BeaconBin
+        msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
+
 
       - name: Download and Install Inno Setup
         run: |
