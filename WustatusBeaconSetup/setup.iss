@@ -31,7 +31,11 @@ Name: "{autodesktop}\Wustatus Beacon"; Filename: "{app}\ZentrixLabs.WustatusBeac
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Run]
-Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; Parameters: "install"; Flags: runhidden waituntilterminated; Description: "Install Wustatus Beacon Service"
+Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
+  Parameters: "--install ""{app}\ZentrixLabs.WustatusBeacon.exe"""; \
+  Flags: runhidden waituntilterminated; \
+  Description: "Install Wustatus Beacon Service"
+
 
 [UninstallRun]
 Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; Parameters: "uninstall"; Flags: runhidden waituntilterminated
