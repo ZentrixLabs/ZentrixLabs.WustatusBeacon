@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -15,6 +15,7 @@
     <RootNamespace>ZentrixLabs.WustatusBeacon</RootNamespace>
     <AssemblyName>ZentrixLabs.WustatusBeacon</AssemblyName>
     <ApplicationIcon>beacon.ico</ApplicationIcon>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 
     <!-- Assembly Info Metadata (replaces AssemblyInfo.cs) -->
     <AssemblyTitle>ZentrixLabs.WustatusBeacon</AssemblyTitle>
