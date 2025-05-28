@@ -47,11 +47,11 @@ jobs:
         run: msbuild "${{ env.SolutionPath }}" -t:Restore -p:Configuration=Release -p:Platform=x64
         shell: powershell
 
-      - name: Build C# and Service Installer projects
+      - name: Build all projects
         run: |
           msbuild ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj /p:Configuration=Release /p:Platform=x64
           msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
-        working-directory: D:\a\ZentrixLabs.WustatusBeacon
+        working-directory: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon
         shell: powershell
 
       - name: Download and Install Inno Setup
