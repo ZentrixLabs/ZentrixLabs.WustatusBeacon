@@ -20,6 +20,7 @@ DefaultDialogFontName=Segoe UI
 
 [Files]
 Source: "..\ZentrixLabs.WustatusBeacon\bin\Release\net48\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\WustatusBeaconInstaller\x64\Release\ZentrixLabs.WustatusBeaconInstaller.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
