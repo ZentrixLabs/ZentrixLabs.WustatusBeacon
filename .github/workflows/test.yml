@@ -54,7 +54,7 @@ jobs:
          -r win-x64 `
          --self-contained false `
          -o $env:BeaconBin
-        msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
+         msbuild WustatusBeaconInstaller\WustatusBeaconInstaller.vcxproj /p:Configuration=Release /p:Platform=x64
 
 
       - name: Download and Install Inno Setup
