@@ -55,7 +55,7 @@
 	<GenerateManifest>false</GenerateManifest>
     <ManifestFile>ZentrixLabs.WustatusBeaconInstaller.exe.manifest</ManifestFile>
 	<OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
-    <BeaconBinaryPath>..\ZentrixLabs.WustatusBeacon\bin\Release\net48\ZentrixLabs.WustatusBeacon.exe</BeaconBinaryPath>
+    <BeaconBinaryPath>..\ZentrixLabs.WustatusBeacon\bin\x64\Release\net48\ZentrixLabs.WustatusBeacon.exe</BeaconBinaryPath>
   </PropertyGroup>
   <Target Name="CopyServiceBinary" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Copy

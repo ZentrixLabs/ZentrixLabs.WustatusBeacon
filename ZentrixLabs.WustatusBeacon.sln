@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZentrixLabs.WustatusBeacon", "ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.csproj", "{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}"
 EndProject
@@ -23,8 +23,8 @@ Global
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Debug|x64.Build.0 = Debug|Any CPU
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Debug|x86.Build.0 = Debug|Any CPU
-		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|Any CPU.ActiveCfg = Release|x64
+		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|Any CPU.Build.0 = Release|x64
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|x64.ActiveCfg = Release|Any CPU
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|x64.Build.0 = Release|Any CPU
 		{C09FCB1F-7241-4F50-A4AC-619F8C42C7D5}.Release|x86.ActiveCfg = Release|Any CPU

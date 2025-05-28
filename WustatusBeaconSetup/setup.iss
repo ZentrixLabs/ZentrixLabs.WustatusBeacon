@@ -19,7 +19,7 @@ ArchitecturesInstallIn64BitMode=x64
 DefaultDialogFontName=Segoe UI
 
 [Files]
-Source: "..\ZentrixLabs.WustatusBeacon\bin\Release\net48\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\ZentrixLabs.WustatusBeacon\bin\x64\Release\net48\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\WustatusBeaconInstaller\bin\Release\ZentrixLabs.WustatusBeaconInstaller.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
@@ -31,6 +31,14 @@ Name: "{autodesktop}\Wustatus Beacon"; Filename: "{app}\ZentrixLabs.WustatusBeac
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Run]
+Filename: "netsh"; \
+  Parameters: "http add urlacl url=http://localhost:7341/wustatus/ user=""NT AUTHORITY\SYSTEM"""; \
+  Flags: runhidden waituntilterminated
+
+Filename: "netsh"; \
+  Parameters: "http add urlacl url=http://localhost:7341/health/ user=""NT AUTHORITY\SYSTEM"""; \
+  Flags: runhidden waituntilterminated
+  
 Filename: "{app}\ZentrixLabs.WustatusBeaconInstaller.exe"; \
   Parameters: "--install ""{app}\ZentrixLabs.WustatusBeacon.exe"""; \
   Flags: runhidden waituntilterminated; \

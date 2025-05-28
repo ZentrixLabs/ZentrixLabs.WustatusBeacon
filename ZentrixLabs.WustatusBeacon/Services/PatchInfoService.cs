@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ZentrixLabs.WustatusBeacon
@@ -9,24 +10,35 @@ namespace ZentrixLabs.WustatusBeacon
     {
         public static PatchStatus GetPatchStatus()
         {
-            var hostname = Environment.MachineName;
-            var osVersion = GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName");
-            var ubrString = GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "UBR");
-            var ubr = string.IsNullOrWhiteSpace(ubrString) ? 0 : Convert.ToInt32(ubrString);
-            var kernelVersion = "10.0." + GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber") + "." + ubr;
-
-            var patchStatus = new PatchStatus
+            try
             {
-                Hostname = hostname,
-                OSVersion = osVersion,
-                KernelVersion = kernelVersion,
-                UBR = ubr,
-                LastPatchDate = GetLastPatchDate(),
-                InstalledKBs = GetInstalledKBs(),
-                PendingReboot = IsRebootPending()
-            };
+                LogEvent("Starting GetPatchStatus()", EventLogEntryType.Information, 9001);
 
-            return patchStatus;
+                var hostname = Environment.MachineName;
+                var osVersion = GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName");
+                var ubrString = GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "UBR");
+                var ubr = string.IsNullOrWhiteSpace(ubrString) ? 0 : Convert.ToInt32(ubrString);
+                var kernelVersion = "10.0." + GetRegistryValue(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber") + "." + ubr;
+
+                var patchStatus = new PatchStatus
+                {
+                    Hostname = hostname,
+                    OSVersion = osVersion,
+                    KernelVersion = kernelVersion,
+                    UBR = ubr,
+                    LastPatchDate = GetLastPatchDate(),
+                    InstalledKBs = GetInstalledKBs(),
+                    PendingReboot = IsRebootPending()
+                };
+
+                LogEvent($"Successfully generated patch status for {hostname}", EventLogEntryType.Information, 9002);
+                return patchStatus;
+            }
+            catch (Exception ex)
+            {
+                LogEvent($"Exception in GetPatchStatus: {ex}", EventLogEntryType.Error, 9900);
+                throw;
+            }
         }
 
 
@@ -108,5 +120,25 @@ namespace ZentrixLabs.WustatusBeacon
         {
             return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired") != null;
         }
+
+        private static void LogEvent(string message, EventLogEntryType type = EventLogEntryType.Information, int eventId = 9000)
+        {
+            const string source = "WustatusBeacon";
+
+            try
+            {
+                if (!EventLog.SourceExists(source))
+                {
+                    EventLog.CreateEventSource(source, "Application");
+                }
+
+                EventLog.WriteEntry(source, message, type, eventId);
+            }
+            catch
+            {
+                // Silent fail: avoid throwing from logging
+            }
+        }
+
     }
 }
