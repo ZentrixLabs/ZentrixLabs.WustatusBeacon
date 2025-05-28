@@ -19,13 +19,13 @@ ArchitecturesInstallIn64BitMode=x64
 DefaultDialogFontName=Segoe UI
 
 [Files]
-Source: "ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"
 Source: "..\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\beacon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
+
 [Icons]
-Name: "{autoprograms}\Wustatus Beacon"; Filename: "{app}\WustatusBeacon.exe"; IconFilename: "{app}\beacon.ico"; WorkingDir: "{app}"
-Name: "{autodesktop}\Wustatus Beacon"; Filename: "{app}\WustatusBeacon.exe"; IconFilename: "{app}\beacon.ico"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{autoprograms}\Wustatus Beacon"; Filename: "{app}\ZentrixLabs.WustatusBeacon.exe"; IconFilename: "{app}\beacon.ico"; WorkingDir: "{app}"
+Name: "{autodesktop}\Wustatus Beacon"; Filename: "{app}\ZentrixLabs.WustatusBeacon.exe"; IconFilename: "{app}\beacon.ico"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
