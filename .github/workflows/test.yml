@@ -15,8 +15,8 @@ env:
   TEMP_DIR: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\temp
   SolutionPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon.sln
   SetupPath: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconSetup
-  BeaconBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\Release
   BeaconExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\Release\ZentrixLabs.WustatusBeacon.exe
+  BeaconBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\bin\Release
   BeaconServiceInstallerBin: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release
   BeaconServiceInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\WustatusBeaconInstaller\x64\Release\ZentrixLabs.WustatusBeaconInstaller.exe
   BeaconInstallerExe: D:\a\ZentrixLabs.WustatusBeacon\ZentrixLabs.WustatusBeacon\artifacts\WustatusBeaconInstaller.exe
