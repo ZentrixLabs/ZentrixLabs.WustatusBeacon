@@ -107,7 +107,11 @@ namespace ZentrixLabs.WustatusBeacon
                         }
                     }
                 }
-                catch { /* ignore WMI errors */ }
+                catch (Exception ex)
+                {
+                    LogEvent($"WMI query failed: {ex}", EventLogEntryType.Warning, 9901);
+                }
+
             }
 
             return results.OrderByDescending(x => x).ToList();

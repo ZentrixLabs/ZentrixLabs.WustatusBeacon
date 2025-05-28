@@ -1,6 +1,6 @@
 [Setup]
 AppName=Wustatus Beacon
-AppVersion=0.1.1
+AppVersion={#MyAppVersion}
 DefaultDirName={pf64}\ZentrixLabs\WustatusBeacon
 DefaultGroupName=Wustatus Beacon
 OutputDir=..\artifacts

@@ -26,7 +26,7 @@ void LogEvent(WORD type, DWORD eventID, const std::wstring& message) {
 // Function to install the service
 bool InstallService(const std::wstring& serviceBinaryPath) {
     const std::wstring installDir = L"C:\\Program Files\\ZentrixLabs\\WustatusBeacon";
-    const std::wstring finalBinaryPath = installDir + L"\\WustatusBeacon.exe";
+    const std::wstring finalBinaryPath = installDir + L"\\ZentrixLabs.WustatusBeacon.exe";
 
     // Create install directory if it doesn't exist
     CreateDirectoryW(installDir.c_str(), nullptr);
@@ -94,7 +94,7 @@ bool InstallService(const std::wstring& serviceBinaryPath) {
 // Function to uninstall the service
 bool UninstallService() {
     const std::wstring installDir = L"C:\\Program Files\\ZentrixLabs\\WustatusBeacon";
-    const std::wstring finalBinaryPath = installDir + L"\\WustatusBeacon.exe";
+    const std::wstring finalBinaryPath = installDir + L"\\ZentrixLabs.WustatusBeacon.exe";
 
     SC_HANDLE schSCManager = OpenSCManager(nullptr, nullptr, SC_MANAGER_ALL_ACCESS);
     if (schSCManager == nullptr) {
