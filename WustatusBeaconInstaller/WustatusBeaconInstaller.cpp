@@ -30,12 +30,19 @@ bool InstallService(const std::wstring& serviceBinaryPath) {
 
     // Create install directory if it doesn't exist
     CreateDirectoryW(installDir.c_str(), nullptr);
+    std::wcout << L"Installing from path: " << serviceBinaryPath << std::endl;
+    std::wcout << L"Installing to path: " << finalBinaryPath << std::endl;
 
     // Copy the service binary to install location
-    if (!CopyFileW(serviceBinaryPath.c_str(), finalBinaryPath.c_str(), FALSE)) {
-        std::wcerr << L"Failed to copy binary to install path: " << GetLastError() << std::endl;
-        LogEvent(EVENTLOG_ERROR_TYPE, EVENT_INSTALL_FAILURE, L"CopyFile failed during install.");
-        return false;
+    if (_wcsicmp(serviceBinaryPath.c_str(), finalBinaryPath.c_str()) != 0) {
+        if (!CopyFileW(serviceBinaryPath.c_str(), finalBinaryPath.c_str(), FALSE)) {
+            std::wcerr << L"Failed to copy binary to install path: " << GetLastError() << std::endl;
+            LogEvent(EVENTLOG_ERROR_TYPE, EVENT_INSTALL_FAILURE, L"CopyFile failed during install.");
+            return false;
+        }
+    }
+    else {
+        std::wcout << L"Binary already in final location, skipping copy." << std::endl;
     }
 
     SC_HANDLE schSCManager = OpenSCManager(nullptr, nullptr, SC_MANAGER_ALL_ACCESS);
@@ -154,10 +161,10 @@ int wmain(int argc, wchar_t* argv[]) {
         }
 
         std::wstring binaryPath = argv[2];
-        if (binaryPath.find(L" ") != std::wstring::npos && binaryPath[0] != L'"') {
-            binaryPath = L"\"" + binaryPath + L"\"";
-        }
-
+		if (binaryPath.empty()) {
+			std::wcerr << L"Binary path cannot be empty." << std::endl;
+			return 1;
+		}
         if (!InstallService(binaryPath)) return 1;
     }
     else if (command == L"--uninstall") {
